@@ -25,7 +25,18 @@ db.connect()
   .catch((err) => console.error('Database connection error:', err));
 
   app.get('/', (req, res) => {
-    res.send('Hello, this is your server!');
+    // Fetch data from the login table
+    const fetchLoginDataSql = 'SELECT * FROM login';
+
+    db.query(fetchLoginDataSql, (err, loginData) => {
+        if (err) {
+            console.error('Error fetching login data:', err);
+            return res.status(500).json({ error: 'Error fetching login data' });
+        }
+
+        // Send the login table data in the response
+        res.json({ status: 'LoginDataFetched', loginData });
+    });
 });
 
 app.post('/signup', (req, res) => {
