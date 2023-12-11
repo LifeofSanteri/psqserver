@@ -6,11 +6,7 @@ const saltRounds = 10;
 const PORT = process.env.PORT || 3000;
 
 const app = express();
-app.use(cors({
-    origin: 'https://home-app-front.onrender.com', // Adjust the origin to match your front-end app
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // Enable credentials (cookies, authorization headers, etc.)
-  }));
+app.use(cors());
 app.use(express.json());
 
 const db = new Client({
