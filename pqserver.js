@@ -24,6 +24,9 @@ db.connect()
   .then(() => console.log('Database connected'))
   .catch((err) => console.error('Database connection error:', err));
 
+  app.get('/', (req, res) => {
+    res.send('Hello, this is your server!');
+});
 
 app.post('/signup', (req, res) => {
     bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
