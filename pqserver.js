@@ -9,6 +9,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://home-app-front.onrender.com");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
+
+
 const db = new Client({
   user: 'homeapp_yspx_user',
   host: 'dpg-clrfnijh3k0c73aiidmg-a.frankfurt-postgres.render.com',
