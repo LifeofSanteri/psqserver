@@ -10,16 +10,20 @@ app.use(cors());
 app.use(express.json());
 
 const db = new Client({
-    user: 'homeapp_yspx_user',
-    host: 'dpg-clrfnijh3k0c73aiidmg-a.frankfurt-postgres.render.com',
-    database: 'homeapp_yspx',
-    password: 'u8WTrTTl13c1qowvav7fk5bdMI8UGxSp',
-    port: 5432,
+  user: 'homeapp_yspx_user',
+  host: 'dpg-clrfnijh3k0c73aiidmg-a.frankfurt-postgres.render.com',
+  database: 'homeapp_yspx',
+  password: 'u8WTrTTl13c1qowvav7fk5bdMI8UGxSp',
+  port: 5432,
+  ssl: {
+    rejectUnauthorized: false, // This line allows a connection to a server with a self-signed certificate
+  },
 });
 
 db.connect()
-    .then(() => console.log('Database connected'))
-    .catch(err => console.error('Database connection error:', err));
+  .then(() => console.log('Database connected'))
+  .catch((err) => console.error('Database connection error:', err));
+
 
 app.post('/signup', (req, res) => {
     bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
